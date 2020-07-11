@@ -29,7 +29,7 @@ class Login extends React.Component {
         // redirect the user to the app's main logged in page
         this.props.history.push("/protected");
       })
-      .catch(err => console.log({ err }));
+      .catch(err => alert( err.response.data.error ));
   };
 
   render() {
