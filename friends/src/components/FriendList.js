@@ -1,7 +1,6 @@
 import React from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from 'axios';
-import { response } from 'express';
 
 //create the friends here
 //send back to the api
@@ -44,7 +43,7 @@ class Friends extends React.Component {
         // console.log("new Friend: ",this.state.newFriend);
     }
 
-    handleChanges = event => {
+    handleDelete = event => {
         this.setState({
             ...this.state,
             deleteFriend: event.target.value 
@@ -58,6 +57,7 @@ class Friends extends React.Component {
         .post('/api/friends', this.state.newFriend)
         .then(response => {
             this.setState({
+                ...this.state,
                 friends: response.data,
                 newFriend: {
                     id: Date.now(),
@@ -67,12 +67,13 @@ class Friends extends React.Component {
                 }
             })
         })
+        .catch(error => console.log({error}))
     }
 
     removeFriend = event => {
         event.preventDefault();
 
-        console.log("Friends: ", this.state.friends)
+        // console.log("Friends: ", this.state.friends)
 
         let id = 0;
         this.state.friends.forEach(friend => {
@@ -81,8 +82,14 @@ class Friends extends React.Component {
                 axiosWithAuth()
                 .delete(`/api/friends/${id}`)
                 .then(res => {
-                    console.log(res);
+                    console.log(res)
+                    this.setState({
+                        ...this.state,
+                        friends: res.data,
+                        deleteFriend: ''
+                    })
                 })
+                .catch(error => console.log({error}))
             };
         })
 
@@ -120,7 +127,7 @@ class Friends extends React.Component {
             <form onSubmit = {this.removeFriend}>
                 <div className = "remove"> Remove a Friend </div>
                 <label htmlFor = 'name'> Name:
-                    <input name = "name" id = 'name' value = {this.state.deleteFriend} type = 'text' onChange = {this.handleChanges}/>
+                    <input name = "name" id = 'name' value = {this.state.deleteFriend} type = 'text' onChange = {this.handleDelete}/>
                 </label>
                 <button type = 'submit'> Remove </button>
             </form>
