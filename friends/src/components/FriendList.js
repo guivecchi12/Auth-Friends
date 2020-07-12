@@ -82,7 +82,7 @@ class Friends extends React.Component {
                 axiosWithAuth()
                 .delete(`/api/friends/${id}`)
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     this.setState({
                         ...this.state,
                         friends: res.data,
@@ -93,7 +93,7 @@ class Friends extends React.Component {
             };
         })
 
-        console.log(id);
+        // console.log(id);
     }
 
     render() {
@@ -106,9 +106,7 @@ class Friends extends React.Component {
                         <h4>{friend.name}</h4>
                         <h7>age: {friend.age}</h7>
                         <h7> email: {friend.email}</h7>
-                    </div>    
-                        
-                        )
+                    </div>)
                 })}</div>
 
             <form onSubmit = {this.handleSubmit}>
