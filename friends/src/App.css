@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.Friends{
+  margin: 50px;
+}
+
+.add{
+  margin: 20px;
+  text-decoration: underline;
+  font-weight: 500;
+  color: olivedrab;
+}
+
+.remove{
+  margin: 20px;
+  text-decoration: underline;
+  font-weight: 500;
+  color: crimson;
+}
+
+label{
+  margin: 5px;
+}
+
+input{
+  margin: 2px;
+}
